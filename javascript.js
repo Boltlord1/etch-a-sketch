@@ -3,8 +3,25 @@ const board = document.querySelector('#board');
 function createBoard(rowCount, rowLength) {
     const rows = [];
     const length = [];
-    for (let i = 0; i < rowCount; i++) rows.push(document.createElement('div'));
-    for (let i = 0; i < rowLength; i++) length.push([]);
+    let i = 0;
+    let j = 0;
+    for (i = 0; i < rowCount; i++) rows.push(document.createElement('div'));
+    for (i = 0; i < rowCount; i++) length.push([]);
+    function appendRows(item) {
+        item.classList.add('row');
+        board.appendChild(item)
+    }
+    function addPixels(item) {
+        function addMorePixels(obj) {
+            obj.classList.add('pixel');
+            for (i = 0; i < rowLength; i++) rows[j].appendChild(obj);
+        }
+        for (i = 0; i < rowLength; i++) item.push(document.createElement('div'));
+        item.forEach(addMorePixels);
+        j++
+    }
+    rows.forEach(appendRows);
+    length.forEach(addPixels);
     function getRandomColor() {
         function getRandomNumber() {return Math.floor(Math.random() * 256);}
         let red = getRandomNumber();
