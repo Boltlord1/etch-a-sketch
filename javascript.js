@@ -36,7 +36,7 @@ function createBoard(rowSize, columnSize) {
 } createBoard(16, 16);
 
 function deleteBoard() {
-    const rows = document.querySelectorAll('.row')
+    const rows = document.querySelectorAll('.row');
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => pixel.remove());
     rows.forEach((row) => row.remove());
@@ -44,11 +44,15 @@ function deleteBoard() {
 
 function reset() {
     deleteBoard();
-    let rowSize = prompt('Number of Rows?', 16)
-    let columnSize = prompt('Pixels per Row?', 16)
-    if (rowSize <= 100 && columnSize <= 100) {
-        createBoard(rowSize, columnSize);
-    }
+    let rowSize = prompt('Number of Rows? (max 100)', 16);
+    let columnSize = prompt('Pixels per Row? (max 100)', 16);
+    if (rowSize > 100 && columnSize > 100) {
+        createBoard(100, 100);
+    } else if (rowSize > 100) {
+        createBoard(100, columnSize);
+    } else if (columnSize > 100) {
+        createBoard(rowSize, 100);
+    } else createBoard(rowSize, columnSize);
 }
-const button = document.querySelector('#button')
-button.addEventListener('click', reset)
+const button = document.querySelector('#button');
+button.addEventListener('click', reset);
