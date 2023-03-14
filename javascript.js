@@ -4,23 +4,7 @@ function createBoard(rowCount, rowLength) {
     const rows = [];
     const length = [];
     for (let i = 0; i < rowCount; i++) rows.push(document.createElement('div'));
-    for (i = 0; i < rowLength; i++) length.push([]);
-    let l = 0
-    function addArray(item) {
-        for (let j = 0; j < rowLength; j++) item.push(document.createElement('div'));
-        function addClasses(obj) {
-            obj.classList.add('pixel');
-            for (i = 0; i < rowCount; i++) rows[l].appendChild(obj);
-        }
-        item.forEach(addClasses);
-        l++;
-    }
-    function appendRows(item) {
-        item.classList.add('row');
-        board.appendChild(item);
-    }
-    rows.forEach(appendRows);
-    length.forEach(addArray);
+    for (let i = 0; i < rowLength; i++) length.push([]);
     function getRandomColor() {
         function getRandomNumber() {return Math.floor(Math.random() * 256);}
         let red = getRandomNumber();
