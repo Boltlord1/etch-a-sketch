@@ -22,12 +22,7 @@ columns.forEach(addArray)
 
 function appendRows(item) {
     item.classList.add('row');
-    item.classList.add('pixel');
     board.appendChild(item);
 }
 
 rows.forEach(appendRows)
-
-console.log(columns.length)
-console.log(rows.length)
-console.log(columns)
