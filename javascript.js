@@ -1,16 +1,16 @@
 const board = document.querySelector('#board');
 
-function createBoard(rowSize, columnSize) {
+function createBoard(rowCount, rowLength) {
     const rows = [];
-    const columns = [];
-    for (let i = 0; i < columnSize; i++) rows.push(document.createElement('div'));
-    for (i = 0; i < rowSize; i++) columns.push([]);
+    const length = [];
+    for (let i = 0; i < rowCount; i++) rows.push(document.createElement('div'));
+    for (i = 0; i < rowLength; i++) length.push([]);
     let l = 0
     function addArray(item) {
-        for (let j = 0; j < rowSize; j++) item.push(document.createElement('div'));
+        for (let j = 0; j < rowLength; j++) item.push(document.createElement('div'));
         function addClasses(obj) {
             obj.classList.add('pixel');
-            for (i = 0; i < rowSize; i++) rows[l].appendChild(obj);
+            for (i = 0; i < rowCount; i++) rows[l].appendChild(obj);
         }
         item.forEach(addClasses);
         l++;
@@ -20,8 +20,7 @@ function createBoard(rowSize, columnSize) {
         board.appendChild(item);
     }
     rows.forEach(appendRows);
-    columns.forEach(addArray);
-
+    length.forEach(addArray);
     function getRandomColor() {
         function getRandomNumber() {return Math.floor(Math.random() * 256);}
         let red = getRandomNumber();
@@ -44,15 +43,9 @@ function deleteBoard() {
 
 function reset() {
     deleteBoard();
-    let rowSize = prompt('Number of Rows? (max 100)', 16);
-    let columnSize = prompt('Pixels per Row? (max 100)', 16);
-    if (rowSize > 100 && columnSize > 100) {
-        createBoard(100, 100);
-    } else if (rowSize > 100) {
-        createBoard(100, columnSize);
-    } else if (columnSize > 100) {
-        createBoard(rowSize, 100);
-    } else createBoard(rowSize, columnSize);
+    let rowCount = prompt('Number of Rows? (max 100)', 16);
+    let rowLength = prompt('Pixels per Row? (max 100)', 16);
+    createBoard(rowCount, rowLength);
 }
 const button = document.querySelector('#button');
 button.addEventListener('click', reset);
